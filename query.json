@@ -1,0 +1,134 @@
+query {
+
+  hotels {
+    id
+        name
+        address
+        rating
+        phone
+        email
+        country
+        pincode
+        latitude
+        longitude
+        checkIn
+        checkOut
+  }
+}
+
+
+
+query {
+
+  hotels (id: 1){
+    id
+        name
+        address
+        rating
+        phone
+        email
+        country
+        pincode
+        latitude
+        longitude
+        checkIn
+        checkOut
+  }
+}
+
+
+query {
+
+  tariff (id: 1){
+     id 
+    hotelId
+    roomType
+    tariff
+  }
+}
+
+
+query {
+
+  reviews (id: 1){
+     hotelId
+    reviewer
+    rating
+    comments
+  }
+}
+
+
+query {
+
+  amenities (id: 1){
+    id
+    hotelId
+    wifi
+    roomService
+    laundry
+    locker
+    swimmingPool
+    giftShops
+  }
+}
+
+
+mutation {
+  createHotel (data : {
+  name: "New Hotel"
+  address: "DElhi"
+  rating: 4.5
+  phone: "12312"
+  email: "hotel@gmail.com"
+  latitude: "12312.2"
+  longitude: "45635.2"
+  country: "India"
+  pincode: "12001"
+  checkIn: "From 2:00 PM"
+  checkOut: "Prior to 12:00 PM"
+  wifi: true
+  roomService: true
+  laundry: true
+  locker: true
+  swimmingPool: true
+  giftShops: true
+  }) {
+    name
+    address
+  }
+}
+
+
+
+subscription {
+	hotel {
+    id
+    name
+    address
+  }
+}
+
+
+mutation {
+  createAmenities (data : {
+  hotelId: 1
+  wifi: true
+  roomService: true
+  laundry: true
+  locker: true
+  swimmingPool: true
+  giftShops: true
+  }) {
+    id
+    hotelId
+  }
+}
+
+
+subscription {
+	amenities {
+    id
+    hotelId
+  }
+}
