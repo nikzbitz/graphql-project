@@ -1,0 +1,94 @@
+type Query {
+        hotels (id: Int, lat:Float, long: Float): [Hotels!]!
+        tariff (id: Int): [Tariff!]!
+        reviews (id: Int ): [Reviews!]!
+        amenities (id: Int ): [Amenities!]!
+        login(email: String!, password: String!): authData!
+    }
+
+    type Mutation {
+        createHotel(data: CreateHotelInput):Hotels!
+        createUser(data: CreateUserInput): User!
+    }
+
+    type Subscription {
+        count : Int!
+        hotel: HotelSubscriptionPayload!
+        amenities: AmenitySubscriptionPayload!
+    }
+
+    enum countryType {
+        India
+    }
+
+input CreateHotelInput {
+  name: String!
+  address: String!
+  rating: Float!
+  phone: String!
+  email: String!
+  latitude: String!
+  longitude: String!
+  country: countryType!
+  pincode: String!
+  checkIn: String!
+  checkOut: String!
+  wifi: Boolean!
+  roomService: Boolean!
+  laundry: Boolean!
+  locker: Boolean!
+  swimmingPool: Boolean!
+  giftShops: Boolean!
+}
+
+    type Hotels {
+        id:ID!
+        name:String!
+        address:String!
+        rating:Float!
+        phone:String!
+        email:String!
+        country:countryType!
+        pincode:String!
+        latitude: Float!
+        longitude: Float!
+        checkIn:String!
+        checkOut:String!
+    }
+    type Tariff { id:ID! hotelId:ID! roomType: String! tariff: Int!}
+    type Reviews { id:ID! hotelId:ID! reviewer: String! rating: Float! comments:String! }
+    type Amenities { id: ID! hotelId: ID! wifi: Boolean! roomService: Boolean! laundry: Boolean! locker: Boolean! swimmingPool: Boolean! giftShops: Boolean! }
+
+    enum MutationType {
+        CREATED
+    }
+
+    
+
+
+    type HotelSubscriptionPayload {
+        mutation : MutationType!
+        data : Hotels!
+    }
+
+    type AmenitySubscriptionPayload {
+        mutation : MutationType!
+        data : Amenities!
+    }
+
+    type authData {
+        userId: String!
+        token: String!
+        tokenExpiration: Int!
+    }
+
+    input CreateUserInput {
+        email: String!
+        password: String!
+    }
+
+    type User {
+        userId: String!
+        email: String!
+        password: String!
+    }
